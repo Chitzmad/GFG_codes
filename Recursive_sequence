@@ -1,0 +1,37 @@
+A function F is defined as follows F(n)= (1) +(2*3) + (4*5*6) ... upto n terms 
+(look at the examples for better clarity). Given an integer n, determine the F(n).
+
+Note: As the answer can be very large, return the answer modulo 109+7.
+
+Example 1:
+
+Input: n = 5
+Output: 365527
+Explanation: 
+F(5) = 1 + 2*3 + 4*5*6 + 7*8*9*10 + 11*12*13*14*15 = 365527.
+
+Approach 1 using loops 
+class Solution{
+public:
+    long long sequence(int n){
+        const int MOD = 1e9 + 7;
+        long long a = 0;
+        long long k = 1;
+        long long m=1;
+        for(int i = 1; i <= n; i++){
+            for(int j = 0; j < i; j++){
+                if(j!=0)
+                {
+                    m+=1;
+                }
+                k=k*m%MOD;
+            }
+            m+=1;
+            a = (a + k) % MOD;
+            k=1;
+        }
+        return a;
+    }
+};
+
+Approach 2 using recursion
